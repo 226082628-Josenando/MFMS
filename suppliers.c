@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#define MAX_SUPPLIERS 100
+#include "suppliers.h"
 
 static char supplierId[MAX_SUPPLIERS][20];
 static char supplierName[MAX_SUPPLIERS][100];
@@ -406,8 +406,3 @@ void supplierMenu(void)
     }
 }
 
-int main(void)
-{
-    supplierMenu();
-    return 0;
-}
