@@ -14,6 +14,10 @@ struct Employee {
       int   years_of_service;
 };
 
+struct Employee  employees[Max_Employees] ;
+int EmployeeCount = 0;
+
+
 void  Menu(){
 
         printf("\n");
@@ -30,13 +34,13 @@ void  Menu(){
 }
 
 
-void AddEmployees(struct Employee  employees[], int *count){
+void AddEmployees(void){
 
-  if (*count>=Max_Employees){
+  if (EmployeeCount>=Max_Employees){
       printf("Is full \n:");
        return;
 }
-        int i = *count;
+        int i = EmployeeCount;
 
        printf("Enter Employee_id :");
        scanf("%d",&employees[i].Employee_id);
@@ -61,25 +65,25 @@ void AddEmployees(struct Employee  employees[], int *count){
        scanf("%d",&employees[i].years_of_service);
        
 
-        *count = *count +1 ;
+      EmployeeCount++;
 
          printf("Employee added:\n");
 
 }
 
 
-void displayEmployees(struct Employee  employees[], int count)
+void displayEmployees(void)
 
 
 {
 
-    if(count == 0){
+    if(EmployeeCount == 0){
     printf("NO Employees\n");
      return;
     }
        printf("\n........Display Employees........\n");
 
-           for(int i = 0 ; i<count;i++){
+           for(int i = 0 ; i<EmployeeCount;i++){
 
            printf("Employee_id : %d\n",employees[i].Employee_id);
            printf("Name : %s\n",employees[i].Name);
@@ -92,7 +96,7 @@ void displayEmployees(struct Employee  employees[], int count)
 
 }
 
-void searchEmployee(struct Employee  employees[], int count) 
+void searchEmployee(void) 
 { 
     
 int search_id;
@@ -100,7 +104,7 @@ int search_id;
 printf("Enter employee_id to search ");
 scanf("%d",&search_id);
 
-    for (int i = 0; i < count; i++) 
+    for (int i = 0; i < EmployeeCount; i++) 
       { 
         if (employees[i].Employee_id == search_id ){
            printf(" \nEmployee found\n");
@@ -119,7 +123,7 @@ scanf("%d",&search_id);
 printf("Employee not found ",search_id);
 }
 
-void calculateSalary(struct Employee  employees[], int count) 
+void calculateSalary(void) 
 { 
     
 int search_id;
@@ -127,7 +131,7 @@ int search_id;
 printf("Enter employee_id to calculate salary ");
 scanf("%d",&search_id);
 
-    for (int i = 0; i < count; i++) 
+    for (int i = 0; i < EmployeeCount; i++) 
       { 
         if (employees[i].Employee_id == search_id ){
            float gross_salary = employees[i].Basic_salary + employees[i].Housing_allowance + employees[i].Transport_allowance ;
@@ -148,17 +152,17 @@ printf("Employee not found ",search_id);
 }
 
 
-void display_Relevant_Informantion(struct Employee  employees[], int count)
+void display_Relevant_Informantion(void)
 
 
 {
-    if(count == 0){
+    if(EmployeeCount == 0){
     printf("NO Employees\n");
      return;
     }
        printf("\n........Relevant Informantion........\n");
 
-           for(int i = 0 ; i<count;i++){
+           for(int i = 0 ; i<EmployeeCount;i++){
 
            printf("Employee_id : %d\n",employees[i].Employee_id);
            printf("Name : %s\n",employees[i].Name);
@@ -169,8 +173,7 @@ void display_Relevant_Informantion(struct Employee  employees[], int count)
 
 int main (){
 
- struct Employee  employees[Max_Employees] ;
-int EmployeeCount = 0;
+
 int choice;
 
     
@@ -183,24 +186,24 @@ scanf("%d",&choice);
 switch(choice){
 
 case 1:
-AddEmployees(employees,&EmployeeCount);
+AddEmployees();
 break;
 
 case 2:
-displayEmployees(employees,EmployeeCount);
+displayEmployees();
 break;
 
 case 3 :
-searchEmployee(employees,EmployeeCount);
+searchEmployee();
 break;
 
 
 case 4 :
-calculateSalary(employees,EmployeeCount);
+calculateSalary();
 break;
 
 case 5 :
-display_Relevant_Informantion(employees,EmployeeCount);
+display_Relevant_Informantion();
 break;
 
 
