@@ -1,0 +1,22 @@
+struct Supplier
+{
+    int supplierID;
+    char name[50];
+    char email[50];
+    char phone[20];
+    char town[30];
+};
+void displaySupplier(struct Supplier s)
+{
+    printf("\n===== SUPPLIER REPORT =====\n");
+    printf("Supplier ID: %d\n",
+           s.supplierID);
+    printf("Name: %s\n",
+           s.name);
+    printf("Email: %s\n",
+           s.email);
+    printf("Phone: %s\n",
+           s.phone);
+    printf("Town: %s\n",
+           s.town);
+}
