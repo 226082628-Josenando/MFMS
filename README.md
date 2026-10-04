@@ -10,7 +10,7 @@ Member 2: Nataniel António
       St. Number: 226172015
 Member 3: Mauipi Kasuto
       St. Number: 226050750
-Member 4: Steven Samuel
+Member 4: Stephanus Samuel 
       St. Number: 224034308
 Member 5: Josenando Gonçalves
       St. Number: 226082628
@@ -68,6 +68,6 @@ Budget Management (main menu option 3): Nataniel António
 
 Asset Management (main menu option 4): Gizela Manuel (Leader)
 
-Reports (main menu option 5): Steven Samuel
+Reports (main menu option 5): Stephanus Samuel 
 
 Testing and Documentation: Jada Shangadi
