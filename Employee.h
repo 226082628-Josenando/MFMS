@@ -1,3 +1,5 @@
+#ifndef EMPLOYEE_H
+#define EMPLOYEE_H
 #define Max_Employees 100
 struct Employee { 
       int Employee_id;
@@ -9,12 +11,17 @@ struct Employee {
       int   years_of_service;
 };
 
+extern struct Employee employees[Max_Employees] ;
+extern int EmployeeCount;
+
+
 void  Menu();
 
-void AddEmployees(struct Employee  employees[], int *count);
-void displayEmployees(struct Employee  employees[], int count);
-void searchEmployee(struct Employee  employees[], int count);
-void calculateSalary(struct Employee  employees[], int count);
-void display_Relevant_Informantion(struct Employee  employees[], int count);
+void AddEmployees(void);
+void displayEmployees(void);
+void searchEmployee(void);
+void calculateSalary(void);
+void display_Relevant_Informantion(void);
  
+#endif
 
