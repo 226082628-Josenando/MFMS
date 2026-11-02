@@ -9,7 +9,6 @@ char phones[MAX_SUPPLIERS][20];
 char towns[MAX_SUPPLIERS][30];
 int count = 0;
 
-/* returns position of supplier in the array, -1 if not found */
 int findSupplier(int id)
 {
 int i;
