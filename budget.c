@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
 
 int main()
 {
@@ -7,16 +10,36 @@ int main()
     float allocatedBudget;
     float expenditure;
     float remainingBudget;
+    int valid;
 
     printf("How many departments do you want to enter? ");
     scanf("%d", &numberOfDepartments);
 
     for (int i = 0; i < numberOfDepartments; i++)
     {
+        do
+        {
+            valid = 1;
+
         printf("\n--- DEPARTMENT %d ---\n", i + 1);
 
         printf("Enter department name: ");
         scanf(" %s", department);
+
+         for (int j = 0; department[j] != '\0'; j++)
+            {
+                if (isdigit(department[j]))
+                {
+                    valid = 0;
+                }
+            }
+
+            if (valid == 0)
+            {
+                printf("Invalid! Department name cannot contain numbers.\n");
+            }
+
+        } while (valid == 0);
 
         printf("Enter allocated budget: N$");
         scanf("%f", &allocatedBudget);
