@@ -27,7 +27,7 @@ int main(void) {
 void addAsset(void) {
    
     if (assetCount >= 100) {
-        printf("Registo cheio.\n");
+        printf("Register is full.\n");
         return;
     }
     
@@ -44,7 +44,7 @@ void addAsset(void) {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 
-   
+
 
     printf("Enter Asset Name: ");
     fgets(assets[assetCount].assetName,50,stdin);
@@ -85,6 +85,7 @@ void addAsset(void) {
 }
 
 void displayAsset(void) {
+    printf("----------------------------------------------------\n"); 
     if (assetCount == 0) {
         printf("No assets.\n");
         return;
@@ -107,7 +108,7 @@ void searchAsset(void) {
     int option;
     int found = 0;
     int id;
-    char termo[50];
+    char searchTerm [50];
 
     if (assetCount == 0) {
         printf("No assets available.\n");
@@ -129,18 +130,18 @@ void searchAsset(void) {
     }
     else if (option == 2) {
         printf("Enter Name: ");
-        fgets(termo, sizeof(termo), stdin);
-        termo[strcspn(termo, "\n")] = '\0';
+        fgets(searchTerm , sizeof(searchTerm), stdin);
+        searchTerm[strcspn(searchTerm , "\n")] = '\0';
     }
     else if (option == 3) {
         printf("Enter Type: ");
-        fgets(termo, sizeof(termo), stdin);
-        termo[strcspn(termo, "\n")] = '\0';
+        fgets(searchTerm , sizeof(searchTerm), stdin);
+        searchTerm[strcspn(searchTerm, "\n")] = '\0';
     }
     else if (option == 4) {
         printf("Enter Department: ");
-        fgets(termo, sizeof(termo), stdin);
-        termo[strcspn(termo, "\n")] = '\0';
+        fgets(searchTerm, sizeof(searchTerm), stdin);
+        searchTerm[strcspn(searchTerm, "\n")] = '\0';
     }
     else {
         printf("Invalid option.\n");
@@ -150,9 +151,9 @@ void searchAsset(void) {
     for (int i = 0; i < assetCount; i++) {
 
         if ((option == 1 && assets[i].assetID == id) ||
-            (option == 2 && strcmp(assets[i].assetName, termo) == 0) ||
-            (option == 3 && strcmp(assets[i].assetType, termo) == 0) ||
-            (option == 4 && strcmp(assets[i].department, termo) == 0)) {
+            (option == 2 && strcmp(assets[i].assetName,searchTerm) == 0) ||
+            (option == 3 && strcmp(assets[i].assetType, searchTerm) == 0) ||
+            (option == 4 && strcmp(assets[i].department, searchTerm) == 0)) {
 
             printf("\n--- Asset Found ---\n");
             printf("Asset ID: %d\n", assets[i].assetID);
@@ -186,7 +187,7 @@ void assetMenu(){
     
     
     if (scanf("%d", &choice) != 1) {
-    printf("Entrada invalida.\n");
+    printf("Invalid entry.\n");
     choice = 0;  
         
     }
@@ -206,7 +207,7 @@ void assetMenu(){
         searchAsset();
         break;
     case 4:
-        printf("Back to main menu!");
+        printf("Exit!");
         break;
     
     default:
