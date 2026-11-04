@@ -44,17 +44,15 @@ void AddEmployees(void){
         
 
          
-     printf("Enter Employee ID: ");
-    scanf("%d", &employees[EmployeeCount].Employee_id);
+    printf("Enter Employee ID: ");
 
-    while (employees[EmployeeCount].Employee_id <= 0){
+while (scanf("%d", &employees[EmployeeCount].Employee_id) != 1 ||
+       employees[EmployeeCount].Employee_id <= 0){
 
-        printf("Invalid ID. Enter a positive ID: ");
-        scanf("%d", &employees[EmployeeCount].Employee_id);
-    }
+    printf("Invalid ID. Enter a positive number: ");
 
-   
-    while ((c = getchar()) != '\n' && c != EOF);
+    while (getchar() != '\n');
+}
 
 
     printf("Enter Name: ");
@@ -67,56 +65,48 @@ void AddEmployees(void){
     employees[EmployeeCount].Department[strcspn(employees[EmployeeCount].Department, "\n")] = '\0';
 
 
-    printf("Enter Basic Salary: ");
-    scanf("%f", &employees[EmployeeCount].Basic_salary);
+  printf("Enter Basic Salary: ");
 
-    while (employees[EmployeeCount].Basic_salary < 0){
+while (scanf("%f", &employees[EmployeeCount].Basic_salary) != 1 ||
+       employees[EmployeeCount].Basic_salary < 0){
 
-        printf("Negative values are not allowed!\n");
-        printf("Enter Basic Salary: ");
-        scanf("%f", &employees[EmployeeCount].Basic_salary);
-    }
+    printf("Invalid salary. Enter a positive number: ");
 
-    while ((c = getchar()) != '\n' && c != EOF);
+    while (getchar() != '\n');
+}
 
 
-    printf("Enter Housing Allowance: ");
-    scanf("%f", &employees[EmployeeCount].Housing_allowance);
+  printf("Enter Housing Allowance: ");
 
-    while (employees[EmployeeCount].Housing_allowance < 0){
+while (scanf("%f", &employees[EmployeeCount].Housing_allowance) != 1 ||
+       employees[EmployeeCount].Housing_allowance < 0){
 
-        printf("Negative values are not allowed!\n");
-        printf("Enter Housing Allowance: ");
-        scanf("%f", &employees[EmployeeCount].Housing_allowance);
-    }
+    printf("Invalid allowance. Enter a positive number: ");
 
-    while ((c = getchar()) != '\n' && c != EOF);
+    while (getchar() != '\n');
+}
 
 
     printf("Enter Transport Allowance: ");
-    scanf("%f", &employees[EmployeeCount].Transport_allowance);
 
-    while (employees[EmployeeCount].Transport_allowance < 0){
+while (scanf("%f", &employees[EmployeeCount].Transport_allowance) != 1 ||
+       employees[EmployeeCount].Transport_allowance < 0){
 
-        printf("Negative values are not allowed!\n");
-        printf("Enter Transport Allowance: ");
-        scanf("%f", &employees[EmployeeCount].Transport_allowance);
-    }
+    printf("Invalid allowance. Enter a positive number: ");
 
-    while ((c = getchar()) != '\n' && c != EOF);
+    while (getchar() != '\n');
+}
 
 
-    printf("Enter Years of Service: ");
-    scanf("%d", &employees[EmployeeCount].years_of_service);
+ printf("Enter Years of Service: ");
 
-    while (employees[EmployeeCount].years_of_service < 0){
+while (scanf("%d", &employees[EmployeeCount].years_of_service) != 1 ||
+       employees[EmployeeCount].years_of_service < 0){
 
-        printf("Negative values are not allowed!\n");
-        printf("Enter Years of Service: ");
-        scanf("%d", &employees[EmployeeCount].years_of_service);
-    }
+    printf("Invalid years of service. Enter a positive number: ");
 
-    while ((c = getchar()) != '\n' && c != EOF);
+    while (getchar() != '\n');
+}
 
     EmployeeCount++;
 
