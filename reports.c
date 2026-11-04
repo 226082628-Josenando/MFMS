@@ -1,9 +1,11 @@
 /* ---------------- Reports module ---------------- */
 void generateEmployeeReport(void) {
-    float totalSalary = 0.0f;
-    float averageSalary = 0.0f;
-    float highestSalary = 0.0f;
-    float lowestSalary = 0.0f;
+    float totalBasic = 0.0f;
+    float totalAllowances = 0.0f;
+    float totalGross = 0.0f;
+    float averageGross = 0.0f;
+    float highestGross = 0.0f;
+    float lowestGross = 0.0f;
 
     printf("\n========== EMPLOYEE REPORT ==========\n");
 
@@ -14,46 +16,56 @@ void generateEmployeeReport(void) {
         return;
     }
 
-    highestSalary = employees[0].Basic_salary;
-    lowestSalary = employees[0].Basic_salary;
+    /* Gross salary = basic + housing allowance + transport allowance */
+    highestGross = getGrossSalary(employees[0]);
+    lowestGross = getGrossSalary(employees[0]);
 
     for (int i = 0; i < EmployeeCount; i++) {
-        totalSalary += employees[i].Basic_salary;
-        if (employees[i].Basic_salary > highestSalary) {
-            highestSalary = employees[i].Basic_salary;
+        float gross = getGrossSalary(employees[i]);
+
+        totalBasic += employees[i].Basic_salary;
+        totalAllowances += employees[i].Housing_allowance + employees[i].Transport_allowance;
+        totalGross += gross;
+
+        if (gross > highestGross) {
+            highestGross = gross;
         }
-        if (employees[i].Basic_salary < lowestSalary) {
-            lowestSalary = employees[i].Basic_salary;
+        if (gross < lowestGross) {
+            lowestGross = gross;
         }
     }
 
-    averageSalary = totalSalary / EmployeeCount;
+    averageGross = totalGross / EmployeeCount;
 
     printf("Total Employees: %d\n", EmployeeCount);
-    printf("Average Salary: N$%.2f\n", averageSalary);
-    printf("Highest Salary: N$%.2f\n", highestSalary);
-    printf("Lowest Salary: N$%.2f\n", lowestSalary);
-    printf("Total Salary Expense: N$%.2f\n", totalSalary);
+    printf("Total Basic Salary: N$%.2f\n", totalBasic);
+    printf("Total Allowances (Housing + Transport): N$%.2f\n", totalAllowances);
+    printf("Average Gross Salary: N$%.2f\n", averageGross);
+    printf("Highest Gross Salary: N$%.2f\n", highestGross);
+    printf("Lowest Gross Salary: N$%.2f\n", lowestGross);
+    printf("Total Gross Salary Expense: N$%.2f\n", totalGross);
 
-    printf("\n--- SALARY BREAKDOWN BY DEPARTMENT ---\n");
+    printf("\n--- GROSS SALARY BREAKDOWN BY DEPARTMENT ---\n");
     char departments[50][50];
     int deptCount = 0;
-    float deptSalaries[50] = {0};
+    float deptGross[50] = {0};
     int deptEmployees[50] = {0};
 
     for (int i = 0; i < EmployeeCount; i++) {
         int found = 0;
+        float gross = getGrossSalary(employees[i]);
+
         for (int j = 0; j < deptCount; j++) {
             if (strcmp(departments[j], employees[i].Department) == 0) {
                 found = 1;
-                deptSalaries[j] += employees[i].Basic_salary;
+                deptGross[j] += gross;
                 deptEmployees[j]++;
                 break;
             }
         }
         if (!found && deptCount < 50) {
             strcpy(departments[deptCount], employees[i].Department);
-            deptSalaries[deptCount] = employees[i].Basic_salary;
+            deptGross[deptCount] = gross;
             deptEmployees[deptCount] = 1;
             deptCount++;
         }
@@ -62,8 +74,8 @@ void generateEmployeeReport(void) {
     for (int i = 0; i < deptCount; i++) {
         printf("\nDepartment: %s\n", departments[i]);
         printf("  Employees: %d\n", deptEmployees[i]);
-        printf("  Total Salary: N$%.2f\n", deptSalaries[i]);
-        printf("  Average Salary: N$%.2f\n", deptSalaries[i] / deptEmployees[i]);
+        printf("  Total Gross Salary: N$%.2f\n", deptGross[i]);
+        printf("  Average Gross Salary: N$%.2f\n", deptGross[i] / deptEmployees[i]);
     }
 
     printf("\n=====================================\n\n");
@@ -305,7 +317,6 @@ void generateComprehensiveReport(void) {
 
 void reportsMenu(void) {
     int choice;
-    int c;
 
     do {
         printf("\n========== REPORTS MENU ==========\n");
@@ -321,30 +332,16 @@ void reportsMenu(void) {
         if (scanf("%d", &choice) != 1) {
             choice = 0;
         }
-        /* clear the rest of the line once, whether or not the input was valid */
-        while ((c = getchar()) != '\n' && c != EOF);
+        clearInputBuffer();
 
         switch (choice) {
-            case 1:
-                generateEmployeeReport();
-                break;
-            case 2:
-                generateBudgetReport();
-                break;
-            case 3:
-                generateSupplierReport();
-                break;
-            case 4:
-                generateAssetReport();
-                break;
-            case 5:
-                generateComprehensiveReport();
-                break;
-            case 6:
-                printf("Returning to main menu...\n");
-                break;
-            default:
-                printf("Invalid choice. Please try again.\n");
+            case 1: generateEmployeeReport();      break;
+            case 2: generateBudgetReport();        break;
+            case 3: generateSupplierReport();      break;
+            case 4: generateAssetReport();         break;
+            case 5: generateComprehensiveReport(); break;
+            case 6: printf("Returning to main menu...\n"); break;
+            default: printf("Invalid choice. Please try again.\n");
         }
     } while (choice != 6);
 }
