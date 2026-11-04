@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+#include<string.h>
 
 
 
@@ -28,7 +28,7 @@ void  Menu(){
         printf("2. Display Employee\n");
         printf("3.search Employee\n");
         printf("4.Calculate Salary\n");
-        printf("5. Display Relevant information\n");
+        printf("5.Display Relevant information\n");
         printf("6.Exit\n");
         printf("Enter choice\n");
 }
@@ -40,36 +40,89 @@ void AddEmployees(void){
       printf("Is full \n:");
        return;
 }
-        int i = EmployeeCount;
+        int c;
+        
 
-       printf("Enter Employee_id :");
-       scanf("%d",&employees[i].Employee_id);
-       getchar();
+         
+     printf("Enter Employee ID: ");
+    scanf("%d", &employees[EmployeeCount].Employee_id);
 
-       printf("Enter Name :");
-       fgets(employees[i].Name,sizeof(employees[i].Name),stdin);
+    while (employees[EmployeeCount].Employee_id <= 0){
 
-       printf("Department :");
-       fgets(employees[i].Department,sizeof(employees[i].Department),stdin);
+        printf("Invalid ID. Enter a positive ID: ");
+        scanf("%d", &employees[EmployeeCount].Employee_id);
+    }
 
-       printf("Enter Basic_salary :");
-       scanf("%f",&employees[i].Basic_salary);
+   
+    while ((c = getchar()) != '\n' && c != EOF);
 
-       printf("Enter Housing_allowance :");
-       scanf("%f",&employees[i].Housing_allowance);
 
-       printf("Enter Transport_allowance :");
-       scanf("%f",&employees[i].Transport_allowance); 
+    printf("Enter Name: ");
+    fgets(employees[EmployeeCount].Name, 50, stdin);
+    employees[EmployeeCount].Name[strcspn(employees[EmployeeCount].Name, "\n")] = '\0';
 
-       printf("Enter years of service :");
-       scanf("%d",&employees[i].years_of_service);
-       
 
-      EmployeeCount++;
+    printf("Enter Department: ");
+    fgets(employees[EmployeeCount].Department, 50, stdin);
+    employees[EmployeeCount].Department[strcspn(employees[EmployeeCount].Department, "\n")] = '\0';
 
-         printf("Employee added:\n");
 
+    printf("Enter Basic Salary: ");
+    scanf("%f", &employees[EmployeeCount].Basic_salary);
+
+    while (employees[EmployeeCount].Basic_salary < 0){
+
+        printf("Negative values are not allowed!\n");
+        printf("Enter Basic Salary: ");
+        scanf("%f", &employees[EmployeeCount].Basic_salary);
+    }
+
+    while ((c = getchar()) != '\n' && c != EOF);
+
+
+    printf("Enter Housing Allowance: ");
+    scanf("%f", &employees[EmployeeCount].Housing_allowance);
+
+    while (employees[EmployeeCount].Housing_allowance < 0){
+
+        printf("Negative values are not allowed!\n");
+        printf("Enter Housing Allowance: ");
+        scanf("%f", &employees[EmployeeCount].Housing_allowance);
+    }
+
+    while ((c = getchar()) != '\n' && c != EOF);
+
+
+    printf("Enter Transport Allowance: ");
+    scanf("%f", &employees[EmployeeCount].Transport_allowance);
+
+    while (employees[EmployeeCount].Transport_allowance < 0){
+
+        printf("Negative values are not allowed!\n");
+        printf("Enter Transport Allowance: ");
+        scanf("%f", &employees[EmployeeCount].Transport_allowance);
+    }
+
+    while ((c = getchar()) != '\n' && c != EOF);
+
+
+    printf("Enter Years of Service: ");
+    scanf("%d", &employees[EmployeeCount].years_of_service);
+
+    while (employees[EmployeeCount].years_of_service < 0){
+
+        printf("Negative values are not allowed!\n");
+        printf("Enter Years of Service: ");
+        scanf("%d", &employees[EmployeeCount].years_of_service);
+    }
+
+    while ((c = getchar()) != '\n' && c != EOF);
+
+    EmployeeCount++;
+
+    printf("Employee added successfully!\n");
 }
+
 
 
 void displayEmployees(void)
@@ -104,6 +157,8 @@ int search_id;
 printf("Enter employee_id to search ");
 scanf("%d",&search_id);
 
+   
+
     for (int i = 0; i < EmployeeCount; i++) 
       { 
         if (employees[i].Employee_id == search_id ){
@@ -120,7 +175,7 @@ scanf("%d",&search_id);
         } 
 
 }
-printf("Employee not found ",search_id);
+printf("Employee %d not found ",search_id);
 }
 
 void calculateSalary(void) 
@@ -147,7 +202,7 @@ return;
     }
 
 
-printf("Employee not found ",search_id);
+printf("Employee %d not found ",search_id);
 
 }
 
@@ -175,13 +230,20 @@ int main (){
 
 
 int choice;
-
+int c;
     
 
     
 do{
 Menu();
-scanf("%d",&choice);
+
+if (scanf("%d", &choice) != 1) {
+    printf("Invalid entry.\n");
+    choice = 0;  
+        
+    }
+
+    while ((c = getchar()) != '\n' && c != EOF);
 
 switch(choice){
 
@@ -206,11 +268,15 @@ case 5 :
 display_Relevant_Informantion();
 break;
 
+case 6:                                                
+printf("Exiting program...\n");
+break;
+
 
 default:
 printf ("invalid choice");
 }
-} while (choice != 5);
+} while (choice != 6);
 
 
     
